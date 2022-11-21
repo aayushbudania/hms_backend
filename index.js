@@ -31,6 +31,10 @@ app.use("/appointments", appointmentRoute);
 app.use("/prescriptions", prescriptionRoute);
 app.use("/bills", billRoute);
 
+app.use((err, req, res, next) => {
+        return res.status(500).send("Error");
+})
+
 mongoose.connection.on("disconnected", () => {
         console.log("MongoDB disconnected");
 })

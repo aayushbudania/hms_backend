@@ -9,19 +9,19 @@ router.get("/",(req,res) => {
 })
 
 // CREATE DOCTOR
-router.post("/", async (req,res) => {
+router.post("/", async (req,res, next) => {
         const newDoctor = new Doctor(req.body)
 
         try {
                 const savedDoctor = await newDoctor.save()
                 res.status(200).json(savedDoctor)
         } catch(err) {
-                res.status(500).json(err)
+                next(err)
         }
 })
 
 //GET DOCTOR
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
         try {
                 const doctor = await Doctor.findById(
                         req.params.id)
@@ -29,7 +29,7 @@ router.get("/:id", async (req, res) => {
                 res.status(200).json(doctor)
                 
         } catch(err) {
-                res.status(500).json(err)
+                next(err)
         }
 })
 
@@ -41,7 +41,7 @@ router.get("/", async (req, res) => {
                 res.status(200).json(doctors)
                 
         } catch(err) {
-                res.status(500).json(err)
+                next(err)
         }
 })
 
@@ -73,7 +73,7 @@ router.delete("/:id", async (req, res) => {
                 res.status(200).json("Deleted Doctor Records.")
                 
         } catch(err) {
-                res.status(500).json(err)
+                next(err)
         }
 })
 export default router;

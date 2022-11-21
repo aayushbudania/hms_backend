@@ -6,4 +6,8 @@ router.get("/",(req,res) => {
         res.status(200).send("Patients");
 })
 
+router.post("/",(req, res) => {
+        
+})
+
 export default router;

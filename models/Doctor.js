@@ -5,31 +5,35 @@ const DoctorSchema = new mongoose.Schema({
                 type: String,
                 required: true,
               },
-              email: {
+        email: {
                 type: String,
                 required: true,
               },
-              password: {
+        password: {
                 type: String,
                 required: true,
               },
-              age: {
+        mobilenumber: {
+                type: String,
+                require: true,
+        },
+        age: {
                 type: Number,
                 required: true,
               },
-              experience: {
+        experience: {
                 type: Number,
                 required: true,
                 min:0
               },
-              specialization: {
+        specialization: {
                 type: String,
                 required: true,
               },
-              appointments: {
+        appointments: {
                 type: [String]
               },
-              image: {
+        image: {
                 type: String
               }
 })

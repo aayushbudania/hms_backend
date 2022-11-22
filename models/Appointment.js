@@ -15,7 +15,7 @@ const AppointmentSchema = new mongoose.Schema({
         doctor: {
                 type: String
         },
-        meetlinks: {
+        meetlink: {
                 type: String
         }
 })

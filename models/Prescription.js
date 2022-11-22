@@ -15,10 +15,10 @@ const PrescriptionSchema = new mongoose.Schema({
                 type: Number,
                 required: true,
               },
-        patients: {
+        patient: {
                 type: String
               },
-        doctors: {
+        doctor: {
                 type: String
               }
 })

@@ -4,10 +4,6 @@ import Doctor from "../models/Doctor.js"
 
 const router = express.Router();
 
-router.get("/",(req,res) => {
-        res.status(200).send("Doctors api");
-})
-
 // CREATE DOCTOR
 router.post("/", async (req,res, next) => {
         const newDoctor = new Doctor(req.body)
@@ -76,4 +72,5 @@ router.delete("/:id", async (req, res) => {
                 next(err)
         }
 })
+
 export default router;

@@ -8,6 +8,7 @@ const PatientSchema = new mongoose.Schema({
         email: {
                 type: String,
                 required: true,
+                uique: true
         },
         password: {
                 type: String,
@@ -15,7 +16,8 @@ const PatientSchema = new mongoose.Schema({
         },
         mobilenumber: {
                 type: String,
-                required: true
+                required: true,
+                unique: true
         },
         age:{
                 type: Number,
@@ -36,7 +38,10 @@ const PatientSchema = new mongoose.Schema({
               },
         image: {
                 type: String
-              }
-})
+              },
+        },
+        {
+                timestamps: true,
+        })
 
 export default mongoose.model("Patient",PatientSchema);

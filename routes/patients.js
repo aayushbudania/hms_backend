@@ -3,18 +3,6 @@ import Patient from "../models/Patient.js"
 
 const router = express.Router();
 
-// CREATE PATIENT
-router.post("/", async (req,res, next) => {
-        const newPatient = new Patient(req.body)
-
-        try {
-                const savedPatient = await newPatient.save()
-                res.status(200).json(savedPatient)
-        } catch(err) {
-                next(err)
-        }
-})
-
 //GET PATIENT
 router.get("/:id", async (req, res, next) => {
         try {

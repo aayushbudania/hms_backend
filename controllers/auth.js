@@ -29,7 +29,7 @@ export const login = async (req, res, next) => {
                   return next(createError(400, "Wrong password or username!"));
 
                 const { password, ...otherDetails } = user._doc;
-                res.status(200).json(...otherDetails)
+                res.status(200).json({...otherDetails})
                 
         } catch(err) {
                 next(err)

@@ -8,6 +8,7 @@ const DoctorSchema = new mongoose.Schema({
         email: {
                 type: String,
                 required: true,
+                unique: true
               },
         password: {
                 type: String,
@@ -16,6 +17,7 @@ const DoctorSchema = new mongoose.Schema({
         mobilenumber: {
                 type: String,
                 require: true,
+                unique: true
         },
         age: {
                 type: Number,

@@ -8,7 +8,7 @@ const PatientSchema = new mongoose.Schema({
         email: {
                 type: String,
                 required: true,
-                uique: true
+                unique: true
         },
         password: {
                 type: String,
@@ -39,6 +39,10 @@ const PatientSchema = new mongoose.Schema({
         image: {
                 type: String
               },
+        isAdmin: {
+                type: Boolean,
+                default: false
+        }
         },
         {
                 timestamps: true,

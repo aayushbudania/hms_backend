@@ -1,10 +1,11 @@
 import express from "express";
 import { createDoctor, deleteDoctor, getDoctor, getDoctors, updateDoctor } from "../controllers/doctor.js";
+import { verifyAdmin } from "../utils/verifyToken.js";
 
 const router = express.Router();
 
 // CREATE DOCTOR
-router.post("/", createDoctor)
+router.post("/", verifyAdmin, createDoctor)
 
 //GET DOCTOR
 router.get("/:id", getDoctor)
@@ -13,9 +14,9 @@ router.get("/:id", getDoctor)
 router.get("/", getDoctors)
 
 // UPDATE DOCTOR
-router.put("/:id", updateDoctor)
+router.put("/:id", verifyAdmin, updateDoctor)
 
 //DELETE DOCTOR
-router.delete("/:id", deleteDoctor)
+router.delete("/:id", verifyAdmin, deleteDoctor)
 
 export default router;

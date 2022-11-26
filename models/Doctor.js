@@ -32,12 +32,24 @@ const DoctorSchema = new mongoose.Schema({
                 type: String,
                 required: true,
               },
-        appointments: {
-                type: [String]
+        consultationfees: {
+                type: Number,
+                required: true,
+                min: 0
               },
         image: {
                 type: String
-              }
-})
+              },
+        meetlink: {
+                type: String,
+                required: true
+        },
+        appointments: [{
+                type: String
+        }],
+        unavailableDates: [{
+                type: Date
+        }],
+},{timestamps: true})
 
 export default mongoose.model("Doctor",DoctorSchema)

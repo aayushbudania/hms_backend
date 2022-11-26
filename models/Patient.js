@@ -33,16 +33,16 @@ const PatientSchema = new mongoose.Schema({
                 type: String,
                 required: true
         },
-        appointments: {
-                type: [String]
-              },
         image: {
                 type: String
               },
         isAdmin: {
                 type: Boolean,
                 default: false
-        }
+        },
+        appointments: [{
+                type: String
+                }],
         },
         {
                 timestamps: true,

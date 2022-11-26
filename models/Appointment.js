@@ -1,11 +1,6 @@
 import mongoose from "mongoose";
 
 const AppointmentSchema = new mongoose.Schema({
-        consultationfees: {
-                type: Number,
-                required: true,
-                min: 0
-              },
         datetime: {
                 type: Date,
               },
@@ -15,8 +10,9 @@ const AppointmentSchema = new mongoose.Schema({
         doctor: {
                 type: String
         },
-        meetlink: {
-                type: String
+        isCompleted: {
+                type: Boolean,
+                default: false
         }
 })
 

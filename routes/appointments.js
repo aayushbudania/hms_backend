@@ -5,13 +5,13 @@ import { verifyUser, verifyAdmin } from "../utils/verifyToken.js";
 const router = express.Router();
 
 // CREATE APPOINTMENT
-router.post("/", verifyUser, createAppointment)
+router.post("/:id/:docid", verifyUser, createAppointment)
 
 //GET APPOINTMENT
-router.get("/:id", verifyUser, getAppointment)
+router.get("/:aid", verifyUser, getAppointment)
 
-//GET ALL APPOINTMENTS
-router.get("/", getAppointments)
+//GET ALL APPOINTMENTS OF THE PATIENT
+router.get("/patient/:id", verifyUser, getAppointments)
 
 // UPDATE APPOINTMENT
 router.put("/:id", verifyAdmin, updateAppointment)

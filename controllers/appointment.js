@@ -1,10 +1,35 @@
 import Appointment from "../models/Appointment.js"
+import Doctor from "../models/Doctor.js"
+import Patient from "../models/Patient.js"
 
 export const createAppointment = async (req, res, next) => {
+        const patientId = req.params.id
+        const doctorId = req.params.docid
+
         const newAppointment = new Appointment(req.body)
+        newAppointment.patient = patientId
+        newAppointment.doctor = doctorId
 
         try {
                 const savedAppointment = await newAppointment.save()
+
+                try{
+                        await Doctor.findByIdAndUpdate(doctorId, {
+                                $push: {
+                                        appointments: savedAppointment._id,
+                                        unavailableDates: savedAppointment.datetime
+                                }
+                        })
+
+                        await Patient.findByIdAndUpdate(patientId, {
+                                $push: {
+                                        appointments: savedAppointment._id
+                                }
+                        })
+                }catch(err) {
+                        next(err)
+                }
+
                 res.status(200).json(savedAppointment)
         } catch(err) {
                 next(err)
@@ -14,7 +39,7 @@ export const createAppointment = async (req, res, next) => {
 export const getAppointment = async (req, res, next) => {
         try {
                 const appointment = await Appointment.findById(
-                        req.params.id)
+                        req.params.aid)
 
                 res.status(200).json(appointment)
                 
@@ -24,8 +49,12 @@ export const getAppointment = async (req, res, next) => {
 }
 
 export const getAppointments = async (req, res, next) => {
+        const patientId = req.params.id
+
         try {
-                const appointments = await Appointment.find()
+                const appointments = await Appointment.find({
+                        patient: patientId
+                })
 
                 res.status(200).json(appointments)
                 

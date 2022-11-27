@@ -10,7 +10,7 @@ router.get("/checkauth", verifyToken, (req, res, next) => {
 })
 
 router.get("/checkuser/:id", verifyUser, (req, res, next) => {
-        res.status(200).send("Patient verified")
+        res.status(200).send(req.user)
 })
 
 router.get("/checkadmin/:id", verifyAdmin, (req, res, next) => {

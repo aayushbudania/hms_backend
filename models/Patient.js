@@ -34,7 +34,7 @@ const PatientSchema = new mongoose.Schema({
                 required: true
         },
         image: {
-                type: String
+                type: [String]
               },
         isAdmin: {
                 type: Boolean,

@@ -13,7 +13,7 @@ router.get("/checkuser/:id", verifyUser, (req, res) => {
         res.status(200).send("User is Verified")
 })
 
-router.get("/checkadmin/:id", verifyAdmin, (req, res) => {
+router.get("/checkadmin/:id", verifyAdmin, (req, res, next) => {
         res.status(200).send("Admin is Verified")
 })
 

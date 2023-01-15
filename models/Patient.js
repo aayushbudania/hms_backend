@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { emailValidator, nameValidator, numberValidator } from "../validators/Regex.validator.js";
 
 const PatientSchema = new mongoose.Schema({
         name: {
@@ -8,7 +9,11 @@ const PatientSchema = new mongoose.Schema({
         email: {
                 type: String,
                 required: true,
-                unique: true
+                unique: true,
+                validate: {
+                    validator: emailValidator,
+                    message: "Email id is not in correct format"
+                }
         },
         password: {
                 type: String,
@@ -17,7 +22,11 @@ const PatientSchema = new mongoose.Schema({
         mobilenumber: {
                 type: String,
                 required: true,
-                unique: true
+                unique: true,
+                validate: {
+                    validator: numberValidator,
+                    message: "Contact number should contain only and exactly 10 digits . ",
+                  },
         },
         age:{
                 type: Number,
@@ -26,13 +35,45 @@ const PatientSchema = new mongoose.Schema({
                 max: 100
         },
         gender: {
-                type: String,
-                required: true
+            type: String,
+            enum: ["Male", "Female", "Other"],
+            required: [true, "Gender Required."],
         },
-        address: {
-                type: String,
-                required: true
-        },
+        permanentAddress: {
+
+            addressLineOne: {
+              type: String,
+              default: null,
+              required: [true, "Address Line One is required."],
+            },
+            addressLineTwo: {
+              type: String,
+              default: null,
+            },
+            state: {
+              type: String,
+              default: null,
+              required: [true, "State is required."],
+              validate: {
+                validator: nameValidator,
+                message: "State should contain only characters."
+              },
+            },
+            city: {
+              type: String,
+              default: null,
+              required: [true, "City is required."],
+              validate: {
+                validator: nameValidator,
+                message: "City should contain only characters."
+              },
+            },
+            zipCode: {
+              type: String,
+              default: null,
+              required: [true, "ZipCode is required."],
+            },
+          },
         image: {
                 type: [String]
               },
@@ -43,6 +84,9 @@ const PatientSchema = new mongoose.Schema({
         appointments: [{
                 type: String
                 }],
+        unavailableDates: [{
+                type: Date
+        }],
         },
         {
                 timestamps: true,

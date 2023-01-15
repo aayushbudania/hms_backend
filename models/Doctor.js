@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { emailValidator, nameValidator, numberValidator } from "../validators/Regex.validator.js";
 
 const DoctorSchema = new mongoose.Schema({
         name: {
@@ -8,7 +9,11 @@ const DoctorSchema = new mongoose.Schema({
         email: {
                 type: String,
                 required: true,
-                unique: true
+                unique: true,
+                validate: {
+                    validator: emailValidator,
+                    message: "Email id is not in correct format"
+                }
               },
         password: {
                 type: String,
@@ -17,7 +22,11 @@ const DoctorSchema = new mongoose.Schema({
         mobilenumber: {
                 type: String,
                 require: true,
-                unique: true
+                unique: true,
+                validate: {
+                    validator: numberValidator,
+                    message: "Contact number should contain only and exactly 10 digits . ",
+                  },
         },
         age: {
                 type: Number,

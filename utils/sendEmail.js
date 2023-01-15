@@ -1,26 +1,27 @@
 import nodemailer from "nodemailer"
 
-export const sendConsultationMeet = (req, res, next) => {
+export const sendConsultationMeet = (options) => {
+
         const transporter = nodemailer.transporter({
                 service: "hotmail",
                 auth: {
-                        user: "medilab@outlook.in",
-                        pass: "lnmiitpasswordy19"
+                        user: process.env.MAIL_USERNAME,
+                        pass: process.env.MAIL_PASSWORD
                 }
         })
 
-        const options = {
-                from: "medilab@outlook.in",
-                to: req.body.email,
-                subject: "Appointment scheduled",
-                text: "Booking Confirmed!!"
-        }
+        const mailOptions = {
+            from: process.env.MAIL_USERNAME,
+            to: options.to,
+            subject: options.subject,
+            html: options.text,
+          };
 
-        transporter.sendMail(options, (err, data) => {
+        transporter.sendMail(mailOptions, (err, data) => {
                 if(err) {
                     console.log('Error Occurs');
                 } else {
-                    next()
+                    console.log('Email sent successfully.');
                 }
             });
 }

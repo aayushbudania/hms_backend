@@ -14,16 +14,17 @@ export const createAppointment = async (req, res, next) => {
                 const savedAppointment = await newAppointment.save()
 
                 try{
-                        await Doctor.findByIdAndUpdate(doctorId, {
+                        const doctor = await Doctor.findByIdAndUpdate(doctorId, {
                                 $push: {
                                         appointments: savedAppointment._id,
                                         unavailableDates: savedAppointment.datetime
                                 }
                         })
 
-                        await Patient.findByIdAndUpdate(patientId, {
+                        const patient = await Patient.findByIdAndUpdate(patientId, {
                                 $push: {
-                                        appointments: savedAppointment._id
+                                        appointments: savedAppointment._id,
+                                        unavailableDates: savedAppointment.datetime
                                 }
                         })
                 }catch(err) {
@@ -31,6 +32,7 @@ export const createAppointment = async (req, res, next) => {
                 }
 
                 res.status(200).json(savedAppointment)
+                next()
         } catch(err) {
                 next(err)
         }
